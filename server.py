@@ -1,3 +1,4 @@
+''' Server file for final project'''
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,6 +6,9 @@ app = Flask("Final project")
 
 @app.route("/emotionDetector")
 def emot_detector():
+    '''
+    function to run emotion detection on some text
+    '''
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
 
@@ -14,12 +18,13 @@ def emot_detector():
     # Return a formatted response
     if response["dominant_emotion"]:
         return response
-    
-    else:
-        return "Invalid text! Please try again!."
+    return "Invalid text! Please try again!."
 
 @app.route("/")
 def render_index_page():
+    '''
+    function to run render index page
+    '''
     return render_template('index.html')
 
 if __name__ == "__main__":
